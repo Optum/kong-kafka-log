@@ -1,0 +1,26 @@
+Kong Kafka Log Plugin
+Copyright 2020 Optum
+
+
+Project Description:
+====================
+
+The Kong Kafka Log is a small, lua-based, OpenResty Nginx module which send logs to Kafka based on Kong’s proxy requests. The purpose of this Kafka plugin is to maintain meta-data logs of all transactions.
+
+
+
+Authors:
+Jeremy Justus, © Optum 2020
+
+
+Added Files:
+============
+
+
+
+
+
+
+
+Modified Files:
+===============
