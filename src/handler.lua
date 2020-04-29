@@ -3,6 +3,7 @@ local producers = require "kong.plugins.kong-kafka-log.producers"
 local cjson = require "cjson"
 local cjson_encode = cjson.encode
 local producer
+local kong = kong
 
 local KongKafkaLogHandler = {}
 
