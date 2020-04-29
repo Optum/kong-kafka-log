@@ -54,7 +54,6 @@ Here's a list of all the parameters which can be used in this plugin's configura
 | `config.topic` 			                        |       | Topic to publish to |
 | `config.ask_id` 			                        |       | ASK Id |
 | `config.app_name` 			                    |       | Application name using logging utility |
-| `config.topic` 			                        |       | Topic to publish to |
 | `config.timeout`   <br /> <small>Optional</small> | 10000 | Socket timeout in millis |
 | `config.keepalive` <br /> <small>Optional</small> | 60000 | Keepalive timeout in millis |
 | `config.ssl` <br /> <small>Optional</small> | false | Enable SSL Connection |
@@ -155,5 +154,5 @@ Original source rewritten from [kong-plugin-kafka-log](https://github.com/yskope
 This plugin makes use of [lua-resty-kafka](https://github.com/doujiang24/lua-resty-kafka) as a dependency. Need version >= ```v0.09```
 
 ## Maintainers
-[jjustus2](https://github.optum.com/jjustus2)<br />
-[rsbrisci](https://github.optum.com/rsbrisci)
+[jeremyjpj0916](https://github.com/jeremyjpj0916)  
+[rsbrisci](https://github.com/rsbrisci)
