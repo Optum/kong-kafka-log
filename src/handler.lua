@@ -8,7 +8,7 @@ local kong = kong
 local KongKafkaLogHandler = {}
 
 KongKafkaLogHandler.PRIORITY = 5
-KongKafkaLogHandler.VERSION = "1.0.0"
+KongKafkaLogHandler.VERSION = "1.0.1"
 
 --- Publishes a message to Kafka.
 -- Must run in the context of `ngx.timer.at`.
@@ -16,10 +16,10 @@ local function log(premature, conf, message)
   if premature then
     return
   end
-  
+
   --Temporary for debugging
   --kong.log.err("current Kafka log json format: ", cjson_encode(message))
-  
+
   if not producer then
     local err
     producer, err = producers.new(conf)
