@@ -17,7 +17,7 @@ function ipStrToDigits(ipstr)
   if ipstr then
     local ret=0
     for d in gmatch(ipstr, "%d+") do
-      ret = ret*256 + d 
+      ret = ret*256 + d
     end
     return ret
   else
@@ -70,23 +70,23 @@ function _M.serialize(ngx, kong, conf)
   if not kong then
     kong = gkong
   end
-  
+
   -- Handles Nil Users
   local ConsumerUsername
   if ctx.authenticated_consumer ~= nil then
     ConsumerUsername = ctx.authenticated_consumer.username
   end
-    
+
   local PathOnly
   if var.request_uri ~= nil then
       PathOnly = string.gsub(var.request_uri,"%?.*","")
   end
-    
+
   local UpstreamPathOnly
   if var.upstream_uri ~= nil then
       UpstreamPathOnly = string.gsub(var.upstream_uri,"%?.*","")
   end
-  
+
   local BackendIp
   local BackendPort
   local DestHostName
@@ -102,9 +102,13 @@ function _M.serialize(ngx, kong, conf)
   if ctx.service ~= nil then
         serviceName = ctx.service.name
   end
-  
+
   local consumerFacingPort = ((var.server_port == "8443" or var.server_port == "8000") and "443" or "8443")
 
+  local temp_request = "https://" .. var.host .. ":" .. consumerFacingPort
+  if PathOnly then
+         temp_request = temp_request .. PathOnly
+  end
   return {
       name = serviceName,
       eventClass = tostring(ngx.status),
@@ -137,7 +141,7 @@ function _M.serialize(ngx, kong, conf)
           path = UpstreamPathOnly
       },
       request = {
-          request = "https://" .. var.host .. ":" .. consumerFacingPort .. PathOnly,
+          request = temp_request,
           method = kong.request.get_method(),
           Optum_CID_Ext = req.get_headers()["optum-cid-ext"],
           ["in"] = tonumber(var.request_length), --in is reserved word and must wrap it like so
