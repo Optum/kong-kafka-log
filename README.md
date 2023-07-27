@@ -63,6 +63,7 @@ Here's a list of all the parameters which can be used in this plugin's configura
 | --- 						| --- | --- |
 | `name` 					                        |       | The name of the plugin to use, in this case `kafka-log` |
 | `config.log_to_file` 	                    |       | Option to log messages to a file specified in Nginx configuration block’s error_log |
+| `config.log_to_kafka` 	                    |       | Option to disable kafka logging |
 | `config.bootstrap_servers` 	                    |       | List of bootstrap brokers in `host:port` format |
 | `config.topic` 			                        |       | Topic to publish to |
 | `config.ask_id` 			                        |       | ASK Id |
