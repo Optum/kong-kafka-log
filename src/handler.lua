@@ -48,7 +48,8 @@ function KongKafkaLogHandler:log(conf)
 
   if conf.log_to_file:
     log_to_file(conf, message)
-  else
+  end
+  if conf.log_to_kafka:
     local ok, err = ngx.timer.at(0, log_to_kafka, conf, message)
     if not ok then
       kong.log.err("[kong-kafka-log] failed to create timer: ", err)

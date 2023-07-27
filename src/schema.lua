@@ -31,7 +31,7 @@ return {
             match = [[^[^*&%%\`]+$]],
             err = "not a valid filename",
           }},
-          { reopen = { type = "boolean", default = false }, },
+          { log_to_kafka = { type = "boolean", default = true }, },
           { bootstrap_servers = {
               type = "array",
               custom_validator = check_bootstrap_servers,
@@ -58,7 +58,7 @@ return {
   },
   entity_checks = {
     { conditional = {
-      if_field = "config.log_to_file", if_match = { ne = "none" },
+      if_field = "config.log_to_kafka", if_match = { eq = false },
       then_field = "config.bootstrap_servers", then_match = { required = false },
       then_field = "config.topic", then_match = { required = false },
     } },
