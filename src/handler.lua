@@ -14,7 +14,6 @@ KongKafkaLogHandler.VERSION = "1.0.2"
 local function log_to_file(conf, message)
   local msg = cjson.encode(message) .. "\n"
   kong.log(msg)
-
 end
 
 --- Publishes a message to Kafka.
