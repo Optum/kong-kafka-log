@@ -10,7 +10,7 @@ local KongKafkaLogHandler = {}
 KongKafkaLogHandler.PRIORITY = 5
 KongKafkaLogHandler.VERSION = "1.0.1"
 
--- Writes message to a file location defined at Nginx
+-- Writes message to a file location defined at Kongs's configuration properties. i.e., admin_error_log, proxy_error_log
 local function log_to_file(conf, message)
   local msg = cjson.encode(message) .. "\n"
   kong.log(msg)
