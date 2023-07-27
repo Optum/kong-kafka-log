@@ -25,12 +25,7 @@ return {
     { config = {
         type = "record",
         fields = {
-          { log_to_file = { 
-            type = "string",
-            required = false,
-            match = [[^[^*&%%\`]+$]],
-            err = "not a valid filename",
-          }},
+          { log_to_file = { type = "boolean", default = false }},
           { log_to_kafka = { type = "boolean", default = true }, },
           { bootstrap_servers = {
               type = "array",
