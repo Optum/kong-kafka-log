@@ -45,10 +45,10 @@ end
 function KongKafkaLogHandler:log(conf)
   local message = basic_serializer.serialize(ngx, nil, conf)
 
-  if conf.log_to_file:
+  if conf.log_to_file then 
     log_to_file(conf, message)
   end
-  if conf.log_to_kafka:
+  if conf.log_to_kafka then
     local ok, err = ngx.timer.at(0, log_to_kafka, conf, message)
     if not ok then
       kong.log.err("[kong-kafka-log] failed to create timer: ", err)
