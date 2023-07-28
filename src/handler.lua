@@ -8,11 +8,17 @@ local kong = kong
 local KongKafkaLogHandler = {}
 
 KongKafkaLogHandler.PRIORITY = 5
-KongKafkaLogHandler.VERSION = "1.0.1"
+KongKafkaLogHandler.VERSION = "1.0.2"
+
+-- Writes message to a file location defined at Kongs's configuration properties. i.e., admin_error_log, proxy_error_log
+local function log_to_file(conf, message)
+  local msg = cjson.encode(message) .. "\n"
+  kong.log(msg)
+end
 
 --- Publishes a message to Kafka.
 -- Must run in the context of `ngx.timer.at`.
-local function log(premature, conf, message)
+local function log_to_kafka(premature, conf, message)
   if premature then
     return
   end
@@ -38,9 +44,15 @@ end
 
 function KongKafkaLogHandler:log(conf)
   local message = basic_serializer.serialize(ngx, nil, conf)
-  local ok, err = ngx.timer.at(0, log, conf, message)
-  if not ok then
-    kong.log.err("[kong-kafka-log] failed to create timer: ", err)
+
+  if conf.log_to_file:
+    log_to_file(conf, message)
+  end
+  if conf.log_to_kafka:
+    local ok, err = ngx.timer.at(0, log_to_kafka, conf, message)
+    if not ok then
+      kong.log.err("[kong-kafka-log] failed to create timer: ", err)
+    end
   end
 end
 

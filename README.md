@@ -19,7 +19,7 @@ $ luarocks make *.rockspec
 
 ## Configuration
 
-### Enabling globally
+### Enabling globally for Kafka Logging
 
 ```bash
 $ curl -X POST http://kong:8001/plugins \
@@ -42,6 +42,17 @@ $ curl -X POST http://kong:8001/plugins \
     --data "config.producer_async_flush_timeout=1000" \
     --data "config.producer_async_buffering_limits_messages_in_memory=50000"
 ```
+### Enabling globally for Stdout Logging
+
+```bash
+$ curl -X POST http://kong:8001/plugins \
+    --data "name=kong-kafka-log" \
+    --data "config.log_to_file=true" \
+    --data "config.log_to_kafka=false" \
+    --data "config.ask_id=MYASKID-00000000" \
+    --data "config.app_name=GatewayStageEnvironment" \
+
+```
 
 ### Parameters
 
@@ -50,6 +61,8 @@ Here's a list of all the parameters which can be used in this plugin's configura
 | Form Parameter | default | description |
 | --- 						| --- | --- |
 | `name` 					                        |       | The name of the plugin to use, in this case `kafka-log` |
+| `config.log_to_file` 	                    |       | Option to log messages to a file specified in Kongs's configuration properties i.e.`admin_error_log` / `proxy_error_log` |
+| `config.log_to_kafka` 	                    |       | Option to disable kafka logging |
 | `config.bootstrap_servers` 	                    |       | List of bootstrap brokers in `host:port` format |
 | `config.topic` 			                        |       | Topic to publish to |
 | `config.ask_id` 			                        |       | ASK Id |
