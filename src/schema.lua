@@ -17,6 +17,8 @@ local function check_bootstrap_servers(values)
   return false, "bootstrap_servers is required"
 end
 
+
+
 return {
   name = "kong-kafka-log",
   fields = {
@@ -26,6 +28,15 @@ return {
         type = "record",
         fields = {
           { log_to_file = { type = "boolean", default = false }, },
+          { log_to_file_level = { type = "string", default = "notice", one_of = {
+            "debug",
+            "info",
+            "notice",
+            "warn",
+            "error",
+            "crit",
+            "alert"
+          }}},
           { log_to_kafka = { type = "boolean", default = true }, },
           { bootstrap_servers = {
               type = "array",

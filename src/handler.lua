@@ -13,7 +13,19 @@ KongKafkaLogHandler.VERSION = "1.0.2"
 -- Writes message to a file location defined at Kongs's configuration properties. i.e., admin_error_log, proxy_error_log
 local function log_to_file(conf, message)
   local msg = cjson.encode(message) .. "\n"
-  kong.log(msg)
+
+  local log_tbl =
+  {
+    ["debug"] = function() kong.log.debug(msg) end,
+    ["info"] =  function() kong.log.info(msg) end,
+    ["notice"] = function() kong.log.notice(msg) end,
+    ["warn"] = function() kong.log.warn(msg) end,
+    ["error"] = function() kong.log.err(msg) end,
+    ["crit"] = function() kong.log.crit(msg) end,
+    ["alert"] = function() kong.log.alert(msg) end,
+  }
+  log_tbl[conf.log_to_file_level]()
+
 end
 
 --- Publishes a message to Kafka.
