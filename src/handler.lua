@@ -7,6 +7,9 @@ local kong = kong
 local ffi = require "ffi"
 local system_constants = require "lua_system_constants"
 
+KongKafkaLogHandler.PRIORITY = 5
+KongKafkaLogHandler.VERSION = "1.0.2"
+
 local O_CREAT = system_constants.O_CREAT()
 local O_WRONLY = system_constants.O_WRONLY()
 local O_APPEND = system_constants.O_APPEND()
@@ -14,6 +17,9 @@ local S_IRUSR = system_constants.S_IRUSR()
 local S_IWUSR = system_constants.S_IWUSR()
 local S_IRGRP = system_constants.S_IRGRP()
 local S_IROTH = system_constants.S_IROTH()
+
+local oflags = bit.bor(O_WRONLY, O_CREAT, O_APPEND)
+local mode = bit.bor(S_IRUSR, S_IWUSR, S_IRGRP, S_IROTH)
 
 ffi.cdef [[
 int write(int fd, const void * ptr, int numbytes);
@@ -79,9 +85,6 @@ local function log_to_kafka(premature, conf, message)
 end
 
 local KongKafkaLogHandler = {}
-
-KongKafkaLogHandler.PRIORITY = 5
-KongKafkaLogHandler.VERSION = "1.0.2"
 
 function KongKafkaLogHandler:log(conf)
   local message = basic_serializer.serialize(ngx, nil, conf)
