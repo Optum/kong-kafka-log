@@ -7,9 +7,10 @@ local kong = kong
 local ffi = require "ffi"
 local system_constants = require "lua_system_constants"
 
+
+local KongKafkaLogHandler = {}
 KongKafkaLogHandler.PRIORITY = 5
 KongKafkaLogHandler.VERSION = "1.0.2"
-local KongKafkaLogHandler = {}
 
 local O_CREAT = system_constants.O_CREAT()
 local O_WRONLY = system_constants.O_WRONLY()
