@@ -32,7 +32,7 @@ local file_descriptors = {}
 -- Log to a file. 
 -- @param `conf`     Configuration table, holds http endpoint details
 -- @param `message`  Message to be logged
-local function log(conf, message)
+local function log_to_file(conf, message)
   local msg = cjson.encode(message) .. "\n"
   local reopen = false
   local fd = file_descriptors[conf.log_to_file_path]
