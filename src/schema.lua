@@ -28,15 +28,12 @@ return {
         type = "record",
         fields = {
           { log_to_file = { type = "boolean", default = false }, },
-          { log_to_file_level = { type = "string", default = "notice", one_of = {
-            "debug",
-            "info",
-            "notice",
-            "warn",
-            "error",
-            "crit",
-            "alert"
-          }}},
+          { log_to_file_path = { type = "string",
+            required = false,
+            match = [[^[^*&%%\`]+$]],
+            err = "not a valid filename",
+            default = "/dev/stdout"
+          }, },
           { log_to_kafka = { type = "boolean", default = true }, },
           { bootstrap_servers = {
               type = "array",
@@ -68,5 +65,6 @@ return {
       then_field = "config.bootstrap_servers", then_match = { required = false },
       then_field = "config.topic", then_match = { required = false },
     } },
+    
   }
 }
