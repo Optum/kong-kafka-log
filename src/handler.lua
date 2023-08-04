@@ -9,6 +9,7 @@ local system_constants = require "lua_system_constants"
 
 KongKafkaLogHandler.PRIORITY = 5
 KongKafkaLogHandler.VERSION = "1.0.2"
+local KongKafkaLogHandler = {}
 
 local O_CREAT = system_constants.O_CREAT()
 local O_WRONLY = system_constants.O_WRONLY()
@@ -84,7 +85,6 @@ local function log_to_kafka(premature, conf, message)
   end
 end
 
-local KongKafkaLogHandler = {}
 
 function KongKafkaLogHandler:log(conf)
   local message = basic_serializer.serialize(ngx, nil, conf)
