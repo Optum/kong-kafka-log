@@ -1,6 +1,6 @@
 # kong-kafka-log
 
-This plugin publishes request and response logs to a [Kafka](https://kafka.apache.org/) topic.
+This plugin publishes request and response logs to a [Kafka](https://kafka.apache.org/) topic or to file/stdout.
 
 ## Supported Kong Releases
 Kong >= 1.x.x 
