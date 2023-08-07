@@ -12,6 +12,8 @@ local KongKafkaLogHandler = {}
 KongKafkaLogHandler.PRIORITY = 5
 KongKafkaLogHandler.VERSION = "1.0.2"
 
+local C = ffi.C
+
 local O_CREAT = system_constants.O_CREAT()
 local O_WRONLY = system_constants.O_WRONLY()
 local O_APPEND = system_constants.O_APPEND()
