@@ -143,7 +143,7 @@ function _M.serialize(ngx, kong, conf)
       request = {
           request = temp_request,
           method = kong.request.get_method(),
-          Optum_CID_Ext = req.get_headers(1)["optum-cid-ext"],
+          Optum_CID_Ext = req.get_headers()["optum-cid-ext"],
           ["in"] = tonumber(var.request_length), --in is reserved word and must wrap it like so
           out = tonumber(var.bytes_sent)
       }

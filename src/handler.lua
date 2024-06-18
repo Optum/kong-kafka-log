@@ -10,7 +10,7 @@ local system_constants = require "lua_system_constants"
 
 local KongKafkaLogHandler = {}
 KongKafkaLogHandler.PRIORITY = 5
-KongKafkaLogHandler.VERSION = "1.0.2"
+KongKafkaLogHandler.VERSION = "1.0.3"
 
 local C = ffi.C
 
@@ -31,7 +31,7 @@ int write(int fd, const void * ptr, int numbytes);
 
 local file_descriptors = {}
 
--- Log to a file. 
+-- Log to a file.
 -- @param `conf`     Configuration table, holds http endpoint details
 -- @param `message`  Message to be logged
 local function log_to_file(conf, message)
@@ -92,7 +92,7 @@ end
 function KongKafkaLogHandler:log(conf)
   local message = basic_serializer.serialize(ngx, nil, conf)
 
-  if conf.log_to_file then 
+  if conf.log_to_file then
     log_to_file(conf, message)
   end
   if conf.log_to_kafka then

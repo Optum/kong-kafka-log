@@ -3,7 +3,7 @@
 This plugin publishes request and response logs to a [Kafka](https://kafka.apache.org/) topic or to file/stdout.
 
 ## Supported Kong Releases
-Kong >= 1.x.x 
+Kong >= 3.7.x
 
 ## Installation
 Recommended:
@@ -79,7 +79,7 @@ Here's a list of all the parameters which can be used in this plugin's configura
 | `config.producer_request_retries_max_attempts` <br /> <small>Optional</small> 	         | 10      | Maximum number of retry attempts per single Produce request |
 | `config.producer_request_retries_backoff_timeout` <br /> <small>Optional</small>	     	 | 100     | Backoff interval between retry attempts in millis |
 | `config.producer_async` <br /> <small>Optional</small>                                     | true    | Flag to enable asynchronous mode |
-| `config.producer_async_flush_timeout` <br /> <small>Optional</small>                       | 1000    | Maximum time interval in millis between buffer flushes in in asynchronous mode | 
+| `config.producer_async_flush_timeout` <br /> <small>Optional</small>                       | 1000    | Maximum time interval in millis between buffer flushes in in asynchronous mode |
 | `config.producer_async_buffering_limits_messages_in_memory` <br /> <small>Optional</small> | 50000   | Maximum number of messages that can be buffered in memory in asynchronous mode |
 
 ## Log Format
@@ -129,7 +129,7 @@ As the log format is custom for our requirements for Kafka logging, you can fork
 
 ## Known issues and limitations
 
-Known limitations: 
+Known limitations:
 
 1. There is no support for Authentication (Would like to see MTLS Auth or [SASL](https://kafka.apache.org/protocol.html#sasl_handshake) written into underlying dependency [library](https://github.com/doujiang24/lua-resty-kafka))
 2. There is no support for message compression
